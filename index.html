@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <style type="text/css">
             table {
                 border-collapse: collapse;
@@ -103,16 +104,18 @@ and open the template in the editor.
     <script>
         var turn = 0;
         var player = '';
+        var cell = '';
+        var score;
 
-        document.getElementById("cell0").onclick = function() {putSymbol("cell0")};
-        document.getElementById("cell1").onclick = function() {putSymbol("cell1")};
-        document.getElementById("cell2").onclick = function() {putSymbol("cell2")};
-        document.getElementById("cell3").onclick = function() {putSymbol("cell3")};
-        document.getElementById("cell4").onclick = function() {putSymbol("cell4")};
-        document.getElementById("cell5").onclick = function() {putSymbol("cell5")};
-        document.getElementById("cell6").onclick = function() {putSymbol("cell6")};
-        document.getElementById("cell7").onclick = function() {putSymbol("cell7")};
-        document.getElementById("cell8").onclick = function() {putSymbol("cell8")};
+        document.getElementById("cell0").onclick = function() {putSymbol("0")};
+        document.getElementById("cell1").onclick = function() {putSymbol("1")};
+        document.getElementById("cell2").onclick = function() {putSymbol("2")};
+        document.getElementById("cell3").onclick = function() {putSymbol("3")};
+        document.getElementById("cell4").onclick = function() {putSymbol("4")};
+        document.getElementById("cell5").onclick = function() {putSymbol("5")};
+        document.getElementById("cell6").onclick = function() {putSymbol("6")};
+        document.getElementById("cell7").onclick = function() {putSymbol("7")};
+        document.getElementById("cell8").onclick = function() {putSymbol("8")};
 
 
 
@@ -127,12 +130,31 @@ and open the template in the editor.
             }
         }
 
-        function putSymbol(cell) {
+        function putSymbol(position) {
             changePlayer()
+            cell = "cell" + position
+            console.log(cell)
             document.getElementById(cell).innerHTML = player;
-            console.log(cell);
-            console.log(player);
+            console.log(position)
+            sendDataToServer(position)
+        }
 
+        function sendDataToServer(data) {
+            // var ajax = new XMLHttpRequest();
+            // ajax.onload = receiveResponse;
+            // ajax.open("POST", "http://localhost:8080/api/hello", true);
+            // ajax.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            // ajax.send(JSON.stringify({ position: data }));
+            axios.post('http://localhost:8080/xoproject/gameOX', {
+                position: data
+            })
+            .then(function (response) {
+                console.log(response);
+                if (response) {
+                    score++;
+                    document.getElementById(scorewinp1).innerHTML = score;
+                }
+            })
         }
     </script>
 </html>
