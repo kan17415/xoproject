@@ -10,43 +10,42 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
-
-            table { 
-                border-collapse: collapse; 
-                border-spacing: 0; 
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
             }
 
-            #board { 
-                padding: 0px; 
-                margin: 0 auto; 
-                margin-top: 25px; 
+            #board {
+                padding: 0px;
+                margin: 0 auto;
+                margin-top: 25px;
             }
 
-            #board tr td { 
-                width: 80px; 
-                height: 80px; 
-                border: 1px solid white; 
-                font-family: Helvetica;  
-                font-size: 30px; 
-                text-align: center; 
+            #board tr td {
+                width: 80px;
+                height: 80px;
+                border: 1px solid white;
+                font-family: Helvetica;
+                font-size: 30px;
+                text-align: center;
             }
-             #score tr td { 
-                width: 40px; 
-                height: 40px; 
-                border: 1px solid white; 
-                font-family: Helvetica;  
-                font-size: 10px; 
-                text-align: center; 
+             #score tr td {
+                width: 40px;
+                height: 40px;
+                border: 1px solid white;
+                font-family: Helvetica;
+                font-size: 10px;
+                text-align: center;
             }
-            #score{ 
-                padding: 0px; 
-                margin: 0 auto; 
-                margin-top: 25px; 
+            #score{
+                padding: 0px;
+                margin: 0 auto;
+                margin-top: 25px;
             }
 
-            #board tr td:hover { 
-                background: red; 
-                cursor: pointer; 
+            #board tr td:hover {
+                background: red;
+                cursor: pointer;
             }
             .score{
                 margin-left: 50%;
@@ -61,19 +60,19 @@ and open the template in the editor.
         <table id="board" width="450px" height="450px">
             <tbody>
                 <tr>
-                    <td style="border-top: none;border-left: none">0</td>
-                    <td style="border-top: none">1</td>
-                    <td style="border-top: none;border-right: none">2</td>
+                    <td id="cell0" style="color:white; border-top: none;border-left: none"></td>
+                    <td id="cell1" style="color:white; border-top: none"></td>
+                    <td id="cell2" style="color:white; border-top: none;border-right: none"></td>
                 </tr>
                 <tr>
-                    <td style="border-left: none">3</td>
-                    <td >4</td>
-                    <td style="border-right: none">5</td>
+                    <td id="cell3" style="color:white; border-left: none"></td>
+                    <td id="cell4" style="color:white"></td>
+                    <td id="cell5" style="color:white; border-right: none"></td>
                 </tr>
                 <tr>
-                    <td style="border-bottom: none;border-left: none">6</td>
-                    <td style="border-bottom: none">7</td>
-                    <td style="border-bottom: none;border-right: none">8</td>
+                    <td id="cell6" style="color:white; border-bottom: none;border-left: none"></td>
+                    <td id="cell7" style="color:white; border-bottom: none"></td>
+                    <td id="cell8" style="color:white; border-bottom: none;border-right: none"></td>
                 </tr>
             </tbody>
         </table>
@@ -98,7 +97,42 @@ and open the template in the editor.
                     </div>
                 </td>
             </tr>
-            
+
         </table>
     </body>
+    <script>
+        var turn = 0;
+        var player = '';
+
+        document.getElementById("cell0").onclick = function() {putSymbol("cell0")};
+        document.getElementById("cell1").onclick = function() {putSymbol("cell1")};
+        document.getElementById("cell2").onclick = function() {putSymbol("cell2")};
+        document.getElementById("cell3").onclick = function() {putSymbol("cell3")};
+        document.getElementById("cell4").onclick = function() {putSymbol("cell4")};
+        document.getElementById("cell5").onclick = function() {putSymbol("cell5")};
+        document.getElementById("cell6").onclick = function() {putSymbol("cell6")};
+        document.getElementById("cell7").onclick = function() {putSymbol("cell7")};
+        document.getElementById("cell8").onclick = function() {putSymbol("cell8")};
+
+
+
+        function changePlayer() {
+            turn++;
+            console.log(turn);
+            if ( turn % 2 == 1 ) {
+                this.player = 'X';
+            }
+            if ( turn % 2 == 0) {
+                this.player = 'O';
+            }
+        }
+
+        function putSymbol(cell) {
+            changePlayer()
+            document.getElementById(cell).innerHTML = player;
+            console.log(cell);
+            console.log(player);
+
+        }
+    </script>
 </html>
