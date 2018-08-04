@@ -1,5 +1,5 @@
 *** Setting ***
-Library    SeleniumLbrary
+Library    SeleniumLibrary
 
 *** Variables ***
 ${URL}    http://localhost:8080/TestRobot/index.jsp
